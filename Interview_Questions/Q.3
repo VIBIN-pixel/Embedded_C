@@ -1,0 +1,59 @@
+What is the difference b/w structure and union. What is the syntax of union?
+
+STRUCTURE:
+
+> Definition: Collection of variables (members) grouped together under one name.
+> Memory: Each member has separate memory->total size = sum of all members(Plus Padding).
+> Access: All members can be used at the same time.
+> Use Case: When you need to store different data together.
+> Example: Employee details (id, salary, name).
+
+UNION:
+
+> Definition: Similar to structure but all members share the same memory location.
+> Memory: All members share the same memory -> total size = size of the largest member. 
+> Access: Only one member at a time holds a valid value.
+> Use Case: When you need to store different data, but only one at a time(saves memory). 
+> Example: Same data in different formats (int, float, char array).
+
+Syntax of Union:
+
+union union_name {
+    data_type members1;
+    data_type members2;
+
+    ----
+};
+
+Example Program:
+
+#include<stdio.h>
+#include<string.h>
+
+//Structure Example
+struct student {
+    int id;
+    float marks;
+    char grade;
+};
+
+//Union Example
+union Data {
+    int i;
+    float f;
+    char str[20];
+};
+int main() {
+    struct student s1 = {1, 95.5, 'A'};
+    union Data d;
+    printf("Structure: id=%d, marks=%.2f, grade=%c\n", s1.id, s1.marks, s1.grade);
+
+    //Using union
+    d.i = 10;
+    printf("Union int: %d\n", d.i);
+    d.f = 3.14; //overwrites previous value
+    printf("Union float:%.2f\n", d.f);
+    strcpy(d.str, "Hello");
+    printf("Union string:%s\n", d.str);
+    return 0;
+}

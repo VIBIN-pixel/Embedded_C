@@ -1,0 +1,22 @@
+/*Write a c code to find the no.of 0's and 1's in a user input value*/
+
+C Program: Count 0's and 1's in a binary representation:
+
+#include<stdio.h>
+int main() {
+    unsigned int n;
+    int ones = 0, zeros = 0;
+    int totalBits = sizeof(n) *8; //number of bits in unsigned int
+
+    printf("Enter a number: ");
+    scanf("%u", &n);
+    for (int i = 0; i<totalBits; i++) {
+        if (n & (1<<i))
+        ones++;
+        else
+        zeros++;
+    }
+    printf("Number of 1's = %d\n", ones);
+    printf("Number of 0's = %d\n", zeros);
+    return 0;
+}

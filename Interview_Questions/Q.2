@@ -1,0 +1,46 @@
+/* What is Inline function, reentrant function?
+
+Inline function:
+
+> Introduced in c99 (Inline keyword).
+> Suggests the compiler to replace the function call with the actual code (like a macron, but safer).
+> Removes function call overhead (stack push/ pop, jump).
+> Useful for small, frequent used functions.
+
+Example: 
+
+#include<stdio.h>
+inline int square (int x) {
+    return x *x;
+}
+int main () {
+    printf("%d\n", square(5)); //Compiler replaces with (5*5);
+    return 0;
+}
+
+
+Reentrant function:
+
+> A reentrant function is one that can be safely interrupted and re-entered before its previous execution
+is completed.
+> Important in multithreading and interrupt handling.
+
+Conditions for a function to be reentrant: 
+
+1.Should not use global/ static variables (Unless Protected).
+2.Should not return address of local variables.
+3.Should not relay on shared resources without synchronization.
+4.Uses only local (stack) variables.
+
+Examples of Non-Reentrant function:
+
+int counter = 0; //global variable
+int increment () {
+    return ++counter; //not reentrant (shared state)
+}
+
+Examples of Reentrant function:
+
+int increment (int counter) { //Uses local variable
+    return counter + 1;
+}
